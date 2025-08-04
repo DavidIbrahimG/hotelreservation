@@ -1,5 +1,9 @@
-pipeline{
-    agent any
+pipeline {
+    agent {
+        docker {
+            image 'python:3.11-slim'
+        }
+    }
 
     environment {
         VENV_DIR = 'venv'
@@ -7,20 +11,26 @@ pipeline{
         GCLOUD_PATH = "/var/jenkins_home/google-cloud-sdk/bin"
     }
 
-    stages{
-        stage('Cloning Github repo to Jenkins'){
-            steps{
-                script{
+    stages {
+        stage('Cloning Github repo to Jenkins') {
+            steps {
+                script {
                     echo 'Cloning Github repo to Jenkins............'
-                    checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'gtihub-token', url: 'https://github.com/DavidIbrahimG/hotelreservation.git']])
+                    checkout scmGit(branches: [[name: '*/main']],
+                        extensions: [],
+                        userRemoteConfigs: [[
+                            credentialsId: 'gtihub-token',
+                            url: 'https://github.com/DavidIbrahimG/hotelreservation.git'
+                        ]]
+                    )
                 }
             }
         }
 
-        stage('Setting up our Virtual Environment and Installing dependancies'){
-            steps{
-                script{
-                    echo 'Setting up our Virtual Environment and Installing dependancies............'
+        stage('Setting up our Virtual Environment and Installing dependencies') {
+            steps {
+                script {
+                    echo 'Setting up virtual environment...'
                     sh '''
                     python -m venv ${VENV_DIR}
                     . ${VENV_DIR}/bin/activate
@@ -30,6 +40,5 @@ pipeline{
                 }
             }
         }
-        
     }
 }
