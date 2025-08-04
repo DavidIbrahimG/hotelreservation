@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/davidibrahim/Programming/krishnaikcourse/hotelreservation/mlruns/0/139f89ff24f6452699723a323ff17f11/artifacts
+end_time: 1754268174548
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 139f89ff24f6452699723a323ff17f11
+run_name: whimsical-grub-899
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1754268163559
+status: 3
+tags: []
+user_id: davidibrahim
