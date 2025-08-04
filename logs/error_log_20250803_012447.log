@@ -1,6 +1,0 @@
-2025-08-03 01:24:47,719 - INFO - Succesfully read the YAML file
-2025-08-03 01:24:47,720 - INFO - Data Ingestion started with my_firstbucket789 and file is  Hotel_Reservations.csv
-2025-08-03 01:24:47,720 - INFO - Starting data ingestion process
-2025-08-03 01:24:50,615 - ERROR - Error while downloading the csv file
-2025-08-03 01:24:50,616 - ERROR - CustomException : Error in /Users/davidibrahim/Programming/krishnaikcourse/hotelreservation/src/data_ingestion.py , line 25 : Failed to downlaod csv file 
-2025-08-03 01:24:50,616 - INFO - Data ingestion completed
