@@ -4,6 +4,10 @@ This project predicts whether a hotel booking will be **canceled or not**, based
 
 ---
 
+
+<img width="1384" height="872" alt="Screenshot 2025-08-05 at 03 56 38" src="https://github.com/user-attachments/assets/b3ddca7c-d046-4ece-aabb-08a17e0f9f0a" />
+
+
 ## 📁 Dataset Overview
 
 The dataset includes hotel booking information with the following sample structure:
@@ -56,6 +60,7 @@ The dataset includes hotel booking information with the following sample structu
 ---
 
 ## 🌐 Flask Prediction UI
+<img width="1232" height="862" alt="Screenshot 2025-08-05 at 03 57 39" src="https://github.com/user-attachments/assets/9c47ac39-3109-4721-bab7-75bbfef658b0" />
 
 - Built a **Flask-based web interface** for users to input booking details and get predictions.
 - Deployed locally for testing and feedback.
