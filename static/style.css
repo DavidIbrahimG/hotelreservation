@@ -11,9 +11,10 @@ body {
     background-color: #f4f7fa;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+    align-items: flex-start;   /* Changed from center to fix top cutoff */
+    min-height: 100vh;
+    padding: 40px 20px;        /* Top padding added for spacing */
+    overflow-y: auto;
 }
 
 /* Container styling */
