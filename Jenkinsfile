@@ -2,13 +2,14 @@ pipeline {
     agent {
         docker {
             image 'python:3.11-slim'
-            GCP_PROJECT = "flash-district-467713-g8"
-            GCLOUD_PATH = "/var/jenkins_home/google-cloud-sdk/bin"
+            args '-v /var/run/docker.sock:/var/run/docker.sock'  // mount docker socket
         }
     }
 
     environment {
-        VENV_DIR = '.venv'  // stays inside the container, NOT on host
+        VENV_DIR = '.venv'
+        GCP_PROJECT = 'flash-district-467713-g8'
+        GCLOUD_PATH = '/var/jenkins_home/google-cloud-sdk/bin'
     }
 
     stages {
@@ -23,31 +24,25 @@ pipeline {
                 '''
             }
         }
-        stage('Building and Pushing Docker Image to GCR'){
-            steps{
-                withCredentials([file(credentialsId: 'GCP-key' , variable : 'GOOGLE_APPLICATION_CREDENTIALS')]){
-                    script{
-                        echo 'Building and Pushing Docker Image to GCR.............'
-                        sh '''
-                        export PATH=$PATH:${GCLOUD_PATH}
 
+        stage('Build and Push Docker Image to GCR') {
+            steps {
+                withCredentials([file(credentialsId: 'GCP-key', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
+                    sh '''
+                    export PATH=$PATH:${GCLOUD_PATH}
 
-                        gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}
+                    gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}
 
-                        gcloud config set project ${GCP_PROJECT}
+                    gcloud config set project ${GCP_PROJECT}
 
-                        gcloud auth configure-docker --quiet
+                    gcloud auth configure-docker --quiet
 
-                        docker build -t gcr.io/${GCP_PROJECT}/ml-project:latest .
+                    docker build -t gcr.io/${GCP_PROJECT}/ml-project:latest .
 
-                        docker push gcr.io/${GCP_PROJECT}/ml-project:latest 
-
-                        '''
-                    }
+                    docker push gcr.io/${GCP_PROJECT}/ml-project:latest
+                    '''
                 }
             }
         }
     }
-
-    
 }
