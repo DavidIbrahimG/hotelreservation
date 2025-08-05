@@ -42,7 +42,8 @@ pipeline {
                     gcloud auth configure-docker --quiet
 
                     echo "Building Docker image..."
-                    docker build -t gcr.io/${GCP_PROJECT}/ml-project:latest .
+                  
+                    docker build --platform=linux/amd64 -t gcr.io/${GCP_PROJECT}/ml-project:latest .
 
                     echo "Pushing Docker image to GCR..."
                     docker push gcr.io/${GCP_PROJECT}/ml-project:latest
